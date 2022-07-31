@@ -12,6 +12,7 @@ tasks:
       cd 01-cli-say-hello
       go get github.com/bots-garden/capsule/capsulemodule/hostfunctions
       cd ..
+      clear
 
 ports:
   - port: 8080
