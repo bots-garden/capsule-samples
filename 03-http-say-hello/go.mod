@@ -1,4 +1,4 @@
-module 02-http-say-hello
+module 03-http-say-hello
 
 go 1.18
 

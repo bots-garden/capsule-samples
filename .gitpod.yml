@@ -3,9 +3,18 @@ image: k33g/capsule:0.0.1
 tasks:
   - name: initialize
     before: |
-      echo "🚀 before..."
+      echo "💊 Installing capsule..."
+      wget https://github.com/bots-garden/capsule/releases/download/0.0.6/capsule-0.0.6-linux-amd64.tar.gz
+      mkdir tmp
+      tar -zxf capsule-0.0.6-linux-amd64.tar.gz --directory tmp
+      cp tmp/capsule capsule
+      rm -rf tmp
+      rm capsule-0.0.6-linux-amd64.tar.gz
     init: |
-      echo "🚀 initialize..."
+      echo "🚀 Get Golang hostfunctions package..."
+      cd 01-cli-say-hello
+      go get github.com/bots-garden/capsule/capsulemodule/hostfunctions
+      cd ..
 
 ports:
   - port: 8080
