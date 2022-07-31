@@ -1,5 +1,5 @@
 #!/bin/bash
-../capsule \
+capsule \
    -wasm=./hello.wasm \
    -mode=http \
    -httpPort=8080
