@@ -4,6 +4,7 @@ static_resources:
   - name: listener_0
     address:
       socket_address:
+        protocol: TCP
         address: 127.0.0.1
         port_value: 8080    
     filter_chains:
@@ -11,27 +12,31 @@ static_resources:
       - name: envoy.filters.network.http_connection_manager
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-          stat_prefix: edge
+          stat_prefix: ingress_http
           http_filters:
           - name: envoy.filters.http.router
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
           route_config:
             virtual_hosts:
-            - name: all_domains
+            - name: local_service
               domains: ["*"]
               routes:
               - match:
                   prefix: "/english"
                 route:
+                  host_rewrite_literal: 127.0.0.1
                   cluster: english
               - match:
                   prefix: "/german"
                 route:
+                  host_rewrite_literal: 127.0.0.1
                   cluster: german
   clusters:
   - name: english
     connect_timeout: 5s
+    type: STRICT_DNS
+    lb_policy: ROUND_ROBIN
     load_assignment:
       cluster_name: english
       endpoints:
@@ -43,6 +48,8 @@ static_resources:
                 port_value: 8081
   - name: german
     connect_timeout: 5s
+    type: STRICT_DNS
+    lb_policy: ROUND_ROBIN
     load_assignment:
       cluster_name: german
       endpoints:
