@@ -1,0 +1,78 @@
+
+static_resources:
+  listeners:
+  - name: listener_0
+    address:
+      socket_address:
+        address: 127.0.0.1
+        port_value: 8080    
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: edge
+          http_filters:
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+          route_config:
+            virtual_hosts:
+            - name: direct_response_service
+              domains: ["*"]
+              routes:
+              #- match:
+              #    prefix: "/"
+              #  direct_response:
+              #    status: 200
+              #    body:
+              #      inline_string: "👋 Hello World 🌍"
+              - match:
+                  prefix: "/english"
+                direct_response:
+                  status: 200
+                  body:
+                    inline_string: "🇬🇧 👋 Hello"
+              - match:
+                  prefix: "/german"
+                direct_response:
+                  status: 200
+                  body:
+                    inline_string: "🇩🇪 👋 Morgen"
+            #- name: all_domains
+            #  domains:
+            #    - "127.0.0.1"
+            #    - "127.0.0.1:8080"
+            #  routes:
+            #  - match:
+            #      prefix: "/english"
+            #    route:
+            #      cluster: english
+            #  - match:
+            #      prefix: "/german"
+            #    route:
+            #      cluster: german
+
+  clusters:
+  - name: english
+    connect_timeout: 5s
+    load_assignment:
+      cluster_name: english
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8081
+  - name: german
+    connect_timeout: 5s
+    load_assignment:
+      cluster_name: german
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8082
