@@ -1,4 +1,4 @@
-hello.wasm
+*.wasm
 capsule
 *.tar.gz
 tmp

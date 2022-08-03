@@ -2,4 +2,4 @@
 capsule \
    -wasm=./hello.wasm \
    -mode=http \
-   -httpPort=8081
+   -httpPort=5050
