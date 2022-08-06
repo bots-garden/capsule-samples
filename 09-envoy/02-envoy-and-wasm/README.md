@@ -1,5 +1,8 @@
 ## helloworld
 
+- https://dev.to/satrobit/extending-envoy-with-webassembly-proxy-filters-1i96
+- https://dev.to/mstryoda/extending-envoy-proxy-wasm-filter-with-golang-j8n
+
 go get github.com/tetratelabs/proxy-wasm-go-sdk
 
 
