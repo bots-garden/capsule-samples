@@ -4,9 +4,9 @@ tasks:
   - name: initialize
     before: |
       echo "💊 Installing capsule..."
-      wget https://github.com/bots-garden/capsule/releases/download/0.0.6/capsule-0.0.6-linux-amd64.tar.gz
-      sudo tar -zxf capsule-0.0.6-linux-amd64.tar.gz --directory /usr/local/bin
-      rm capsule-0.0.6-linux-amd64.tar.gz
+      wget https://github.com/bots-garden/capsule/releases/download/0.0.7/capsule-0.0.7-linux-amd64.tar.gz
+      sudo tar -zxf capsule-0.0.7-linux-amd64.tar.gz --directory /usr/local/bin
+      rm capsule-0.0.7-linux-amd64.tar.gz
     init: |
       echo "🚀 Get Golang hostfunctions package..."
       cd 01-cli-say-hello
