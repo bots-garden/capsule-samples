@@ -6,7 +6,7 @@
 curl -v -X POST \
   http://localhost:8888/memory/functions/registration \
   -H 'content-type: application/json; charset=utf-8' \
-  -d '{"function": "hola", "revision": "000", "url": "http://localhost:7070"}'
+  -d '{"function": "hola", "revision": "0.0.0", "url": "http://localhost:7070"}'
 
 # Add the default revision
 curl -v -X POST \
@@ -19,5 +19,5 @@ curl -v -X POST \
 curl -v -X POST \
   http://localhost:8888/memory/functions/hola/revision \
   -H 'content-type: application/json; charset=utf-8' \
-  -d '{"function": "hola", "revision": "001", "url": "http://localhost:7071"}'
+  -d '{"function": "hola", "revision": "0.0.1", "url": "http://localhost:7071"}'
 

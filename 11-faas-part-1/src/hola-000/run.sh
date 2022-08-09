@@ -1,5 +1,5 @@
 #!/bin/bash
-MESSAGE="💊 Capsule is Awesome 💚" capsule \
+capsule \
    -wasm=./hola.wasm \
    -mode=http \
-   -httpPort=9093
+   -httpPort=7070
